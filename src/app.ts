@@ -1,8 +1,9 @@
 import express, { Express } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { loadEnvs } from "@/config";
+import { loadEnvs, connectDb, disconnectDB } from "@/config";
 import { reportRouter } from "@/routes";
+import usersRouter from "./routes/users-route";
 dotenv.config();
 loadEnvs();
 
@@ -11,16 +12,16 @@ const app = express();
 app
   .use(cors())
   .use(express.json())
-  .use("/report", reportRouter);
-
+  .use("/report", reportRouter)
+  .use("/users", usersRouter);
 
 export function init(): Promise<Express> {
-  //connectDb();
+  connectDb();
   return Promise.resolve(app);
 }
   
 export async function close(): Promise<void> {
-  //await disconnectDB();
+  await disconnectDB();
 }
   
 export default app;

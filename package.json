@@ -41,6 +41,7 @@
     "redis": "^4.5.1"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.15",
     "@types/jest": "^29.2.5",

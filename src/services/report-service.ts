@@ -24,7 +24,7 @@ generateReport();
 setInterval(generateReport, 3600000);
 
 function createOceanReport(data: OceanData) {
-  let report = `Olá, Cláudio! \n Seguem as condições oceânicas:`;
+  let report = "Olá, Cláudio! \n Seguem as condições oceânicas:";
   const { Avg_W_Tmp1 } = data;
   const { Hsig } = data;
   const waveCondition = checkWaveCondition(Number(Hsig));
