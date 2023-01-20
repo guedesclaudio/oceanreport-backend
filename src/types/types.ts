@@ -27,3 +27,14 @@ export type AtmosphereData = {
     Avg_Wnd_Dir_N: string | null,
     M_Decl: string | null
 };
+
+export type UserData = {
+    name: string,
+    email: string, 
+    password: any
+};
+
+export type ApplicationError = {
+    name: string,
+    message: string
+};
