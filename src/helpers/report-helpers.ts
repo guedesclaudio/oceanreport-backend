@@ -1,4 +1,5 @@
 export function checkTemperatureCondition(temperature: number) {
+    if (temperature === null) return "\n Infelizmente não foi possível ter acesso aos dados de temperatura da água do mar";
     if (temperature >= 21) return `\n A temperatura da água está quente e se encontra em ${temperature} °C.`;
     if (temperature > 18 && temperature < 21) return `\n A temperatura da água está um pouco gelada e se encontra em ${temperature} °C.`;
     if (temperature < 18 && temperature >= 16) return `\n A temperatura da água está bem gelada e se encontra em ${temperature} °C.`;
@@ -6,6 +7,7 @@ export function checkTemperatureCondition(temperature: number) {
 }
   
 export function checkWaveCondition(wave: number) {
+    if (wave === null) return "\n Infelizmente não foi possível ter acesso aos dados de altura de onda do mar";
     if (wave <= 0.50) return ` \n O mar está muito calmo, com ondas em torno de ${wave} metros.`;
     if (wave > 0.50 && wave <= 0.75) return ` \n O mar está levemente ondulado, com ondas em torno de ${wave} metros.`;
     if (wave > 0.75 && wave <= 1.0) return ` \n O mar está com pequenas ondulações em torno de ${wave} metros.`;
@@ -19,6 +21,7 @@ export function checkWaveCondition(wave: number) {
 }
   
 export function checkWindSpeedCondition(wind: number) {
+    if (wind === null) return "\n Infelizmente não foi possível ter acesso aos dados de velocidade do vento";
     wind = wind * 1.8;
     if (wind <= 5.0) return ` \n Hoje está praticamente sem vento, em torno de ${wind} Km/h.`;
     if (wind > 5.0 && wind <= 10.0) return ` \n Hoje está com uma brisa muito leve, em torno de ${wind} Km/h.`;
