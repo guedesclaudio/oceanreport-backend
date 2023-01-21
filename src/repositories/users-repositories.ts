@@ -17,9 +17,19 @@ async function findEmail(email: string) {
   });
 }
 
+async function insertSession(userId: number, token: string) {
+  return prisma.session.create({
+    data: {
+      userId,
+      token
+    }
+  })
+}
+
 const usersRepository = {
   insertUser,
-  findEmail
+  findEmail,
+  insertSession
 };
 
 export default usersRepository;

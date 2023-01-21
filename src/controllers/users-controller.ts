@@ -13,3 +13,7 @@ export async function createUser(req: Request, res: Response) {
     console.error(error);
   }
 }
+
+export async function loginUser(req: Response, res: Response) {
+  
+}
