@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export type OceanData = {
     Hsig: string | null,
     Avg_W_Tmp1: string | null,
@@ -37,4 +39,17 @@ export type UserData = {
 export type ApplicationError = {
     name: string,
     message: string
+};
+
+export type UserDataLogin = Omit<UserData, "name">;
+
+export type UserToken = {
+    userId: number,
+    token: string
+}
+
+export type AuthenticatedRequest = Request & JWTPayload;
+
+export type JWTPayload = {
+  userId: number;
 };

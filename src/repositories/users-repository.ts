@@ -23,7 +23,7 @@ async function insertSession(userId: number, token: string) {
       userId,
       token
     }
-  })
+  });
 }
 
 const usersRepository = {

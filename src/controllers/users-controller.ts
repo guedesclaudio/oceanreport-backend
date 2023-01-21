@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { UserData } from "@/types";
+import { UserData, UserDataLogin } from "@/types";
 import usersService from "@/services/users-service";
 
 export async function createUser(req: Request, res: Response) {
@@ -8,12 +8,21 @@ export async function createUser(req: Request, res: Response) {
 
   try {
     await usersService.insertUserWithData(userData);
-    return res.status(httpStatus.OK).send({ message: "user created" });
+    return res.status(httpStatus.CREATED).send({ message: "user created" });
   } catch (error) {
-    console.error(error);
+    if (error.name === "DuplicatedEmailError") return res.sendStatus(httpStatus.BAD_REQUEST);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
 
-export async function loginUser(req: Response, res: Response) {
-  
+export async function loginUser(req: Request, res: Response) {
+  const userDataLogin = req.body as UserDataLogin;
+
+  try {
+    const response = await usersService.loginUser(userDataLogin);
+    return res.status(httpStatus.OK).send(response);
+  } catch (error) {
+    if (error.name === "LoginInvalidInformations") return res.sendStatus(httpStatus.NOT_FOUND);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
 }
