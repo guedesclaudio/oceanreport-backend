@@ -1,2 +1,2 @@
 export * from "./redis";
-export * from "./users-repositories";
+export * from "./users-repository";

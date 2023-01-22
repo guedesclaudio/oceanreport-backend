@@ -18,7 +18,7 @@ async function generateReport() {
   const lastAtmosphereData = atmosphereData.slice(-1)[0];
   const report = createOceanReport(lastOceanData) + createAtmosphereReport(lastAtmosphereData);
   redis.set("report", report);
-  console.log("Gerou um novo report " + lastOceanData.HOUR  + " horas" + " e " + lastOceanData.MINUTE + " minutos");
+  //console.log("Gerou um novo report " + lastOceanData.HOUR  + " horas" + " e " + lastOceanData.MINUTE + " minutos");
 }
 generateReport();
 setInterval(generateReport, 3600000);

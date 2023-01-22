@@ -6,3 +6,10 @@ export function duplicatedEmailError(): ApplicationError {
     message: "There is already an user with given email",
   };
 }
+
+export function loginInvalidInformations(): ApplicationError {
+  return {
+    name: "LoginInvalidInformations",
+    message: "Invalid informations to login",
+  };
+}
