@@ -62,19 +62,19 @@ describe("POST /users/signin", () => {
         password: faker.internet.password()
       };
       const response = await server.post("/users/signin").send(body);
-      expect(response.status).toBe(httpStatus.CREATED);
+      expect(response.status).toBe(httpStatus.NOT_FOUND);
     });
         
     it("should respond with status 200 when body is valid and return session data", async () => {
-      const user = await createUser();
       const body = {
-        email: user.email,
-        password: user.password
+        email: faker.internet.email(),
+        password: faker.internet.password()
       };
+      await createUser(body);
 
       const response = await server.post("/users/signin").send(body);
-      expect(response.status).toBe(httpStatus.CREATED);
-      expect(response.body).toBe({
+      expect(response.status).toBe(httpStatus.OK);
+      expect(response.body).toEqual({
         userId: response.body.userId,
         token: response.body.token
       });

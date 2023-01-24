@@ -4,13 +4,15 @@ import { UserData, UserDataLogin } from "@/types";
 import usersService from "@/services/users-service";
 
 export async function createUser(req: Request, res: Response) {
-  const userData = req.body as UserData;
+  const userData = req.body
+  delete userData.confirmPassword;
 
   try {
-    await usersService.insertUserWithData(userData);
+    await usersService.insertUserWithData(userData as UserData);
     return res.status(httpStatus.CREATED).send({ message: "user created" });
   } catch (error) {
-    if (error.name === "DuplicatedEmailError") return res.sendStatus(httpStatus.BAD_REQUEST);
+    console.log(error);
+    if (error.name === "duplicatedEmailError") return res.sendStatus(httpStatus.BAD_REQUEST);
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
@@ -22,7 +24,8 @@ export async function loginUser(req: Request, res: Response) {
     const response = await usersService.loginUser(userDataLogin);
     return res.status(httpStatus.OK).send(response);
   } catch (error) {
-    if (error.name === "LoginInvalidInformations") return res.sendStatus(httpStatus.NOT_FOUND);
+    console.log(error)
+    if (error.name === "loginInvalidInformations") return res.sendStatus(httpStatus.NOT_FOUND);
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
