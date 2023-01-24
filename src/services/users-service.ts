@@ -8,7 +8,7 @@ import { exclude } from "@/helpers";
 async function insertUserWithData(userData: UserData): Promise<User> {
   await checkUniqueEmail(userData.email);
   const { password } = userData;
-  userData.password = encryptedPassword(password);
+  userData.password = await encryptedPassword(password);
   return usersRepository.insertUser(userData);
 }
 
@@ -26,11 +26,11 @@ async function checkUniqueEmail(email: string) {
 
 async function checkLogin(UserDataLogin: UserDataLogin) {
   const user = await usersRepository.findEmail(UserDataLogin.email);
-
+  
   if (!user) throw loginInvalidInformations();
 
   const passwordIsValid = await comparePassword(UserDataLogin.password, user.password);
-
+  
   if (!passwordIsValid) throw loginInvalidInformations();
 
   return user.id;
