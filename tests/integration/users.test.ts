@@ -4,7 +4,6 @@ import app, { init } from "@/app";
 import { faker } from "@faker-js/faker";
 import { cleanDb } from "../helpers";
 import { createUser } from "../factories/users-factory";
-import { any } from "joi";
 
 beforeAll(async () => {
   await init();
@@ -33,6 +32,8 @@ describe("POST /users", () => {
         name: faker.name.firstName(),
         email: faker.internet.email(),
         password: faker.internet.password(7),
+        confirmPassword: faker.internet.password(7),
+        report: faker.datatype.boolean(),
       };
 
       const response = await server.post("/users").send(body);

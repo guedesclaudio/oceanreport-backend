@@ -6,7 +6,8 @@ async function insertUser(userData: UserData) {
     data: { 
       name: userData.name,
       email: userData.email,
-      password: userData.password
+      password: userData.password,
+      report: userData.report
     }
   });
 }

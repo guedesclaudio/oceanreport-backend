@@ -33,7 +33,8 @@ export type AtmosphereData = {
 export type UserData = {
     name: string,
     email: string, 
-    password: any
+    password: any,
+    report: boolean
 };
 
 export type ApplicationError = {
