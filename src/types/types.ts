@@ -54,3 +54,11 @@ export type AuthenticatedRequest = Request & JWTPayload;
 export type JWTPayload = {
   userId: number;
 };
+
+export type ReportObject = {
+    waveCondition: string,
+    temperatureCondition: string,
+    windSpeedCondition : string,
+    date: string,
+    hour: string
+};
