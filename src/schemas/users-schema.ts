@@ -5,7 +5,7 @@ export const createUserSchema = Joi.object({
   email: Joi.string().required(),
   password: Joi.string().required().min(6),
   confirmPassword: Joi.string().required().min(6),
-  report: Joi.boolean().required
+  report: Joi.boolean().required()
 });
 
 export const loginUserSchema = Joi.object({

@@ -33,6 +33,7 @@ describe("POST /users", () => {
         email: faker.internet.email(),
         password: faker.internet.password(7),
         confirmPassword: faker.internet.password(7),
+        report: faker.datatype.boolean(),
       };
 
       const response = await server.post("/users").send(body);
