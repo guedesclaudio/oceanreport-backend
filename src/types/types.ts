@@ -62,3 +62,8 @@ export type ReportObject = {
     date: string,
     hour: string
 };
+
+export type Email = {
+    emailsList: string[],
+    report: ReportObject
+}

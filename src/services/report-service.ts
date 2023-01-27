@@ -1,8 +1,10 @@
 import axios from "axios";
 import { OceanData, AtmosphereData } from "@/types";
-import { checkTemperatureCondition, checkWaveCondition, checkWindSpeedCondition } from "@/helpers/report-helpers";
 import redis from "@/repositories/redis";
 import { ReportObject } from "@/types";
+import { sendEmail } from "@/helpers";
+import usersRepository from "@/repositories/users-repository";
+import checkReport from "@/helpers/report-helpers";
 
 async function getReportToday() {
   const reportExistsOnRedis = redis.exists("report");
@@ -15,27 +17,38 @@ async function getReportToday() {
 }
 
 async function generateReport(): Promise<void> {
+  const date = new Date;
+  const hour = date.getHours();
   const timestamp = Date.now();
   const time: string = timestamp.toString();
+  const itsTimeSendEmail = hour == 5 || hour == 17;
+  
   const oceanData = await getOceanData(time);
   const atmosphereData = await getAtmosphereData(time);
   const lastOceanData = oceanData.slice(-1)[0];
   const lastAtmosphereData = atmosphereData.slice(-1)[0];
+
   const report = generateReportObject(lastOceanData, lastAtmosphereData);
   redis.set("report", JSON.stringify(report));
   const email = generateEmailReport(report);
-  //console.log(email);
+  
+  if (itsTimeSendEmail) {
+    const usersList = await usersRepository.findUsersWithReport();
+    const emailsList = usersList.map((value) => value.email);
+    return sendEmail({emailsList, report});
+  }
 }
 generateReport();
 setInterval(generateReport, 3600000);
 
 function generateReportObject(oceanData: OceanData, atmData: AtmosphereData): ReportObject {
+  const check = new checkReport;
   const { Avg_W_Tmp1 } = oceanData;
   const { Hsig } = oceanData;
   const { Avg_Wnd_Sp } = atmData;
-  const waveCondition = checkWaveCondition(Number(Hsig));
-  const temperatureCondition = checkTemperatureCondition(Number(Avg_W_Tmp1));
-  const windSpeedCondition = checkWindSpeedCondition(Number(Avg_Wnd_Sp));
+  const waveCondition = check.waveConditions(Number(Hsig));
+  const temperatureCondition = check.temperatureConditions(Number(Avg_W_Tmp1));
+  const windSpeedCondition = check.windConditions(Number(Avg_Wnd_Sp));
   const reportObject = {
     waveCondition,
     temperatureCondition,

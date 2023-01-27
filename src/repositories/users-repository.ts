@@ -27,10 +27,18 @@ async function insertSession(userId: number, token: string) {
   });
 }
 
+async function findUsersWithReport() {
+  return prisma.user.findMany({
+    select: { email: true },
+    where: { report: true }
+  });
+}
+
 const usersRepository = {
   insertUser,
   findEmail,
-  insertSession
+  insertSession,
+  findUsersWithReport
 };
 
 export default usersRepository;
