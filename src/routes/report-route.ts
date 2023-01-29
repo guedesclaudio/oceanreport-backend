@@ -6,4 +6,4 @@ const reportRouter = Router();
 reportRouter
   .use("/", getReport);
 
-export { reportRouter };
+export default reportRouter ;

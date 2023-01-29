@@ -2,13 +2,13 @@ import { createPost, deletePost, getPosts } from "@/controllers";
 import { Router } from "express";
 import { authenticateToken } from "@/middlewares";
 import { validateBody, validateParams } from "@/middlewares";
-import { createPostSchema } from "@/schemas";
+import { createPostSchema, deletePostSchema } from "@/schemas";
 
-const postsRoute = Router();
+const postsRouter = Router();
 
-postsRoute
+postsRouter
     .get("/", getPosts)
-    .post("/", authenticateToken, validateBody(createPostSchema),createPost)
-    .delete("/", authenticateToken, deletePost)
+    .post("/", authenticateToken, validateBody(createPostSchema), createPost)
+    .delete("/:postId", authenticateToken, validateParams(deletePostSchema), deletePost)
 
-export default postsRoute;
+export default postsRouter;

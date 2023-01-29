@@ -17,7 +17,7 @@ export async function getPosts(req: Request, res: Response) {
 
 export async function createPost(req: AuthenticatedRequest, res: Response) {
 
-    const userId = req;
+    const userId = req.userId;
     const postData = req.body as Post;
 
     try {
@@ -36,6 +36,6 @@ export async function deletePost(req: Request, res: Response) {
         await posts.remove(Number(postId));
         return res.sendStatus(httpStatus.OK);
     } catch (error) {
-        console.error(error);
+        if (error.name === "PostNotFoundError") return res.sendStatus(httpStatus.NOT_FOUND);
     }   
 }
