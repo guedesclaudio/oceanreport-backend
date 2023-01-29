@@ -24,19 +24,20 @@ export default class checkReport {
 
     windConditions(wind: number): string {
       if (wind === null) return "\n Infelizmente não foi possível ter acesso aos dados de velocidade do vento";
-      wind = wind * 1.8;
-      if (wind <= 5.0) return ` \n Hoje está praticamente sem vento, em torno de ${wind} Km/h.`;
-      if (wind > 5.0 && wind <= 10.0) return ` \n Hoje está com uma brisa muito leve, em torno de ${wind} Km/h.`;
-      if (wind > 10.0 && wind <= 15.0) return ` \n Hoje está com uma brisa leve, em torno de ${wind} Km/h.`;
-      if (wind > 15.0 && wind <= 20.0) return ` \n Hoje está com ventos fracos, em torno de ${wind} Km/h, podendo ter rajadas mais fortes`;
-      if (wind > 20.0 && wind <= 30.0) return ` \n Hoje está com ventos de intensidade fraca a mediana, em torno de ${wind} Km/h, podendo ter rajadas mais fortes`;
-      if (wind > 30.0 && wind <= 40.0) return ` \n Hoje está com ventos de intensidade mediana, em torno de ${wind} Km/h, podendo ter rajadas mais fortes`;
-      if (wind > 40.0 && wind <= 50.0) return ` \n Hoje está com ventos de intensidade mediana a forte, em torno de ${wind} Km/h, podendo ter rajadas mais fortes`;
-      if (wind > 50.0 && wind <= 60.0) return ` \n Hoje está com ventos de intensidade forte, em torno de ${wind} Km/h, podendo ter rajadas mais fortes`;
-      if (wind > 60.0 && wind <= 70.0) return ` \n Hoje está com ventos de intensidade muito fortes, em torno de ${wind} Km/h, podendo ter rajadas ainda mais fortes`;
-      if (wind > 70.0 && wind <= 80.0) return ` \n Alerta! Hoje está com ventos de intensidade muito fortes, em torno de ${wind} Km/h, podendo ter rajadas ainda mais fortes`;
-      if (wind > 80.0 && wind <= 90.0) return ` \n Alerta de vendaval! Hoje está com ventos de intensidade fortíssima, em torno de ${wind} Km/h, podendo ter rajadas ainda mais fortes`;
-      if (wind > 90.0 && wind <= 100.0) return ` \n Alerta de tempestade ou ciclone extratropical! Hoje está com ventos de intensidade fortíssima, em torno de ${wind} Km/h, podendo ter rajadas ainda mais fortes`;
-      if (wind > 100.0) return ` \n Alerta de ciclone tropical! Hoje está com ventos de intensidade fortíssima, em torno de ${wind} Km/h, podendo ter rajadas ainda mais fortes`;
+      wind = (wind * 1.8);
+      
+      if (wind <= 5.0) return ` \n Hoje está praticamente sem vento, em torno de ${wind.toFixed(2)} Km/h.`;
+      if (wind > 5.0 && wind <= 10.0) return ` \n Hoje está com uma brisa muito leve, em torno de ${wind.toFixed(2)} Km/h.`;
+      if (wind > 10.0 && wind <= 15.0) return ` \n Hoje está com uma brisa leve, em torno de ${wind.toFixed(2)} Km/h.`;
+      if (wind > 15.0 && wind <= 20.0) return ` \n Hoje está com ventos fracos, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas mais fortes`;
+      if (wind > 20.0 && wind <= 30.0) return ` \n Hoje está com ventos de intensidade fraca a mediana, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas mais fortes`;
+      if (wind > 30.0 && wind <= 40.0) return ` \n Hoje está com ventos de intensidade mediana, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas mais fortes`;
+      if (wind > 40.0 && wind <= 50.0) return ` \n Hoje está com ventos de intensidade mediana a forte, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas mais fortes`;
+      if (wind > 50.0 && wind <= 60.0) return ` \n Hoje está com ventos de intensidade forte, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas mais fortes`;
+      if (wind > 60.0 && wind <= 70.0) return ` \n Hoje está com ventos de intensidade muito fortes, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas ainda mais fortes`;
+      if (wind > 70.0 && wind <= 80.0) return ` \n Alerta! Hoje está com ventos de intensidade muito fortes, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas ainda mais fortes`;
+      if (wind > 80.0 && wind <= 90.0) return ` \n Alerta de vendaval! Hoje está com ventos de intensidade fortíssima, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas ainda mais fortes`;
+      if (wind > 90.0 && wind <= 100.0) return ` \n Alerta de tempestade ou ciclone extratropical! Hoje está com ventos de intensidade fortíssima, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas ainda mais fortes`;
+      if (wind > 100.0) return ` \n Alerta de ciclone tropical! Hoje está com ventos de intensidade fortíssima, em torno de ${wind.toFixed(2)} Km/h, podendo ter rajadas ainda mais fortes`;
     }
 }

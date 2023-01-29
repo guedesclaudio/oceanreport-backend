@@ -13,7 +13,7 @@ async function getReportToday() {
     const response = await redis.get("report");
     return JSON.parse(response);
   };
-  return "report nao atualizado";
+  return "report não atualizado";
 }
 
 async function generateReport(): Promise<void> {
@@ -35,7 +35,7 @@ async function generateReport(): Promise<void> {
   if (itsTimeSendEmail) {
     const usersList = await usersRepository.findUsersWithReport();
     const emailsList = usersList.map((value) => value.email);
-    return sendEmail({emailsList, report});
+    //return sendEmail({emailsList, report});
   }
 }
 generateReport();

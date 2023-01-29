@@ -67,3 +67,8 @@ export type Email = {
     emailsList: string[],
     report: ReportObject
 }
+
+export type Post = {
+    title: string,
+    content: string
+}
