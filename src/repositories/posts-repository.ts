@@ -4,7 +4,13 @@ import { Post } from "@/types";
 export default class postsRepository {
 
     async list() {
-        return prisma.post.findMany();
+        return prisma.post.findMany({
+            include: {
+                User: {
+                    select: { name: true }
+                }
+            }
+        });
     }
 
     async create(postData: Post, userId: number) {
