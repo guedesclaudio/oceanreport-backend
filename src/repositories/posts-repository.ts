@@ -5,6 +5,9 @@ export default class postsRepository {
 
     async list() {
         return prisma.post.findMany({
+            orderBy: {
+                createdAt: 'desc'
+            },
             include: {
                 User: {
                     select: { name: true }
