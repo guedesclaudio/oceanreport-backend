@@ -8,22 +8,24 @@ async function runRedis() {
 }
 runRedis();
 
-function set(key: string, value: string) {
-  return redisClient.set(key, value);
-}
+export default class Redis {
+  private key: string;
+
+  constructor(key: string) {
+    this.key = key;
+  }
+
+  public set(value: string): void {
+    return redisClient.set(this.key, value);
+  }
+    
+  public get(): string {
+    return redisClient.get(this.key);
+  }
   
-function get(key: string) {
-  return redisClient.get(key);
+  public exists() {
+    return redisClient.exists(this.key);
+  }
 }
 
-function exists(key: string) {
-  return redisClient.exists(key);
-}
 
-const redis = {
-  set,
-  get,
-  exists
-};
-
-export default redis;

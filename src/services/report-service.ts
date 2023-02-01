@@ -1,16 +1,17 @@
 import axios from "axios";
 import { OceanData, AtmosphereData } from "@/types";
-import redis from "@/repositories/redis";
 import { ReportObject } from "@/types";
 import { sendEmail } from "@/helpers";
 import usersRepository from "@/repositories/users-repository";
 import checkReport from "@/helpers/report-helpers";
+import Redis from "@/repositories/redis";
+const redis = new Redis("report");
 
 async function getReportToday() {
-  const reportExistsOnRedis = redis.exists("report");
+  const reportExistsOnRedis = redis.exists();
   
   if (reportExistsOnRedis) {
-    const response = await redis.get("report");
+    const response = await redis.get();
     return JSON.parse(response);
   };
   return "report não atualizado";
@@ -29,7 +30,7 @@ async function generateReport(): Promise<void> {
   const lastAtmosphereData = atmosphereData.slice(-1)[0];
 
   const report = generateReportObject(lastOceanData, lastAtmosphereData);
-  redis.set("report", JSON.stringify(report));
+  redis.set(JSON.stringify(report));
   const email = generateEmailReport(report);
   
   if (itsTimeSendEmail) {
@@ -42,13 +43,13 @@ generateReport();
 setInterval(generateReport, 3600000);
 
 function generateReportObject(oceanData: OceanData, atmData: AtmosphereData): ReportObject {
-  const check = new checkReport;
   const { Avg_W_Tmp1 } = oceanData;
   const { Hsig } = oceanData;
   const { Avg_Wnd_Sp } = atmData;
-  const waveCondition = check.waveConditions(Number(Hsig));
-  const temperatureCondition = check.temperatureConditions(Number(Avg_W_Tmp1));
-  const windSpeedCondition = check.windConditions(Number(Avg_Wnd_Sp));
+  const check = new checkReport(Number(Avg_W_Tmp1), Number(Hsig), Number(Avg_Wnd_Sp));
+  const waveCondition = check.waveConditions();
+  const temperatureCondition = check.temperatureConditions();
+  const windSpeedCondition = check.windConditions();
   const reportObject = {
     waveCondition,
     temperatureCondition,
