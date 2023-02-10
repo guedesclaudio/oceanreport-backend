@@ -1,7 +1,7 @@
 <div align="center">
   <h1>OCEAN REPORT v1.0</h1>
   <br> 
-  Ocean Report é um software feito para gerenciar reports das condições oceânicas das praias do Rio de Janeiro. Os reports são feitos com base nos dados em tempo real de uma boia meteo-oceanográfica, localizada na praia de Copacabana. Além disso também é possível possível receber os reports diretamente por email e compartilhar suas próprias observações sobre as condições oceanográficas na sua região com outros usuários através da nossa timeline. Esse é um projeto full stack. <a href = "https://github.com/guedesclaudio/oceanreport-frontend">Repositório do front-end</a>
+  Ocean Report é um software feito para gerenciar reports das condições oceânicas das praias do Rio de Janeiro. Os reports são feitos através de um algoritmo alimentado com base nos dados em tempo real de uma boia meteo-oceanográfica. Além disso, também é possível receber os reports diretamente por email, e compartilhar suas próprias observações sobre as condições oceanográficas na sua região com outros usuários através da nossa timeline. Esse é um projeto full stack. <a href = "https://github.com/guedesclaudio/oceanreport-frontend">Repositório do front-end</a>
   <br>
   <br>
 </div>
