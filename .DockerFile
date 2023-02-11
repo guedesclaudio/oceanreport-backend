@@ -1,8 +1,10 @@
-FROM node:15-alpine
+FROM node:16.19.0
 
-WORKDIR /app
+RUN npm config set cache /tmp --global
 
-COPY package*.json ./
+WORKDIR /usr/src
+
+COPY package*.json .
 
 RUN npm install
 
@@ -12,4 +14,4 @@ ENV PORT=4000
 
 EXPOSE 4000
 RUN npx prisma generate
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "run", "start" ]

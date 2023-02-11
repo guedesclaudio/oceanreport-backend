@@ -1,0 +1,36 @@
+version: "3"
+services:
+  database:
+    image: postgres
+    container_name: database
+    env_file:
+      - .env.development
+    ports:
+      - 2345:5432
+    restart: always
+    volumes:
+      - volume_database:/var/lib/postgresql/data
+
+  api:
+    build: ./
+    container_name: api
+    ports:
+      - 4000:4000
+    env_file:
+      - .env.development
+    volumes:
+      - /usr/src/node_modules
+    entrypoint: dockerize -wait tcp://database:5432 -timeout 20s docker-entrypoint.sh
+    command: "npm run start"
+    depends_on:
+      - database
+
+  redis-database:
+    image: redis
+    container_name: redis-database
+    ports:
+      - 9736:6379
+    restart: always    
+
+volumes:
+  volume_database:
