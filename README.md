@@ -45,11 +45,11 @@ typescript >= v4.5.4
 ```
 3. Rode os seguintes comandos:
 ```bash
-  dev:migration:run
-  test:migration:run
+dev:migration:run
+test:migration:run
 
-  dev:migration:generate
-  test:migration:generate
+dev:migration:generate
+test:migration:generate
 ```
 3. Crie uma chave de acesso no serviço sendgrid e coloque na sua variável de ambiente de acordo com o .env.example
 2. Instale as dependências:
