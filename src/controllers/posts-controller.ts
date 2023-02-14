@@ -31,7 +31,7 @@ export async function createPost(req: AuthenticatedRequest, res: Response) {
 export async function deletePost(req: Request, res: Response) {
 
     const { postId } = req.params;
-
+    
     try {
         await posts.remove(Number(postId));
         return res.sendStatus(httpStatus.OK);
