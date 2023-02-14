@@ -11,7 +11,7 @@ export async function getPosts(req: Request, res: Response) {
         const response = await posts.get();
         return res.status(httpStatus.OK).send(response);
     } catch (error) {
-        console.error(error);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -24,7 +24,7 @@ export async function createPost(req: AuthenticatedRequest, res: Response) {
         await posts.insert(postData, Number(userId));
         return res.sendStatus(httpStatus.CREATED);
     } catch (error) {
-        console.error(error);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
 }
 
@@ -37,5 +37,6 @@ export async function deletePost(req: Request, res: Response) {
         return res.sendStatus(httpStatus.OK);
     } catch (error) {
         if (error.name === "PostNotFoundError") return res.sendStatus(httpStatus.NOT_FOUND);
+        return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }   
 }

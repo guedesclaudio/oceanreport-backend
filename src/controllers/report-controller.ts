@@ -7,6 +7,6 @@ export async function getReport(req: Request, res: Response) {
     const report = await reportService.getReportToday();
     return res.status(httpStatus.OK).send({ report });
   } catch (error) {
-    console.error(error);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
